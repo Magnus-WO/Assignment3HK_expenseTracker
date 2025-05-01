@@ -1,0 +1,36 @@
+.rootContainer {
+  width: 100%;
+  min-height: 100vh;
+  height: 100vh;
+  background-color: var(--color-body-background);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: var(--font-family);
+}
+
+.appContainer {
+  height: 90%;
+  width: 40%;
+  min-width: 400px;
+  background: var(--parchment-light);
+  background-blend-mode: color-burn;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  border-radius: var(--radius-md);
+}
+
+.totalExpensesContainer {
+  height: 35%;
+  width: 100%;
+
+  border-bottom: 1px solid var(--color-border);
+}
+
+.individualExpensesContainer {
+  height: 65%;
+  width: 100%;
+  padding: var(--space-md);
+}
