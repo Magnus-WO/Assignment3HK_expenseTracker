@@ -3,12 +3,6 @@
   width: 3rem;
   cursor: pointer;
   font-style: italic;
-  position: absolute;
-  bottom: var(--space-md);
-  right: var(--space-md);
-
-  background-color: var(--color-accent);
-  color: var(--color-text);
   border: none;
   box-shadow: var(--shadow-md);
   border-radius: var(--radius-sm);

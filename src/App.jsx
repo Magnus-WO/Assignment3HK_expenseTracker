@@ -24,7 +24,12 @@ function App() {
         <section className={styles.individualExpensesContainer}>
           What did I spend it on?
         </section>
-        <Button onClick={openCloseAddModal}>Add</Button>
+        <Button
+          onClick={openCloseAddModal}
+          className={styles.openAddModalButton}
+        >
+          Add
+        </Button>
         {isAddingExpense && <Modal closeModal={openCloseAddModal}></Modal>}
       </div>
     </div>

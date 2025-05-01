@@ -19,6 +19,7 @@
   height: 100%;
   width: 100%;
   background: var(--parchment-golden);
+  background-blend-mode: hard-light;
 
   border-radius: var(--radius-md);
   border: 2px dotted var(--color-border);
@@ -46,6 +47,7 @@
 }
 .input {
   background: var(--color-surface);
+  padding: 0 2px;
 }
 
 .input:focus {
@@ -54,4 +56,22 @@
 
 .textarea {
   resize: none;
+}
+
+.form .submitButton {
+  background-color: var(--color-accent);
+  width: fit-content;
+  padding: var(--space-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form .closeModalButton {
+  background-color: var(--color-danger);
+  color: var(--color-text);
+
+  position: absolute;
+  bottom: var(--space-md);
+  right: var(--space-md);
 }

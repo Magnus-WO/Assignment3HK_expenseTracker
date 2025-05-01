@@ -34,3 +34,12 @@
   width: 100%;
   padding: var(--space-md);
 }
+
+.appContainer .openAddModalButton {
+  background-color: var(--color-accent);
+  color: var(--color-text);
+
+  position: absolute;
+  bottom: var(--space-md);
+  right: var(--space-md);
+}

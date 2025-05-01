@@ -20,9 +20,32 @@ const Modal = ({ closeModal }) => {
     setExpenseInfo((prev) => ({ ...prev, [name]: value }));
   };
 
+  // Saving to firestore
+  const saveToFirestore = async (expense) => {
+    try {
+      const docRef = await addDoc(collection(database, "expenses"), expense);
+      console.log(
+        `expense has been added to firestore with the id ${docRef.id}`
+      );
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  // Handling form submit
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await saveToFirestore(expenseInfo);
+      console.log("expense data:", expenseInfo);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   return (
     <div className={modalStyles.modal}>
-      <form className={modalStyles.form}>
+      <form className={modalStyles.form} onSubmit={handleSubmit}>
         <h1 className={modalStyles.formTitle}>Enter your expense</h1>
         {/* Title */}
         <div className={modalStyles.inputContainer}>
@@ -99,9 +122,16 @@ const Modal = ({ closeModal }) => {
             onChange={handleChange}
           ></textarea>
         </div>
-      </form>
+        <Button className={modalStyles.submitButton}>Add expense</Button>
 
-      <Button onClick={closeModal}>Close</Button>
+        <Button
+          type="button"
+          onClick={closeModal}
+          className={modalStyles.closeModalButton}
+        >
+          Close
+        </Button>
+      </form>
     </div>
   );
 };
