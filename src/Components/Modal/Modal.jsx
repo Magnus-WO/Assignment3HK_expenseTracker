@@ -4,7 +4,7 @@ import { collection, addDoc } from "firebase/firestore";
 import { database } from "../../firebaseConfig";
 import { useState } from "react";
 
-const Modal = ({ closeModal }) => {
+const Modal = ({ closeModal, setIsRendering }) => {
   // Fetching expense info and storing in an object
   const [expenseInfo, setExpenseInfo] = useState({
     title: "",
@@ -41,6 +41,7 @@ const Modal = ({ closeModal }) => {
     } catch (error) {
       console.log(error.message);
     }
+    setIsRendering(true);
   };
 
   return (

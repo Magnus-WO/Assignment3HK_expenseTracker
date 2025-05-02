@@ -4,6 +4,10 @@
   padding: 0;
 }
 
+li {
+  list-style: none;
+}
+
 :root {
   /* Color palette */
   --color-primary: #6b4c9a; /* Arcane purple - mystical and noble */

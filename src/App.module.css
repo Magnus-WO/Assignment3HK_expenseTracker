@@ -25,7 +25,7 @@
 .totalExpensesContainer {
   height: 35%;
   width: 100%;
-
+  padding: var(--space-lg);
   border-bottom: 1px solid var(--color-border);
 }
 
@@ -33,6 +33,7 @@
   height: 65%;
   width: 100%;
   padding: var(--space-md);
+  overflow-y: auto;
 }
 
 .appContainer .openAddModalButton {
