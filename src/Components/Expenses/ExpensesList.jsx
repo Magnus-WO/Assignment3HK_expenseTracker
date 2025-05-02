@@ -5,7 +5,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { database } from "../../firebaseConfig";
 import { useEffect, useState } from "react";
 
-const ExpensesList = ({ isRendering }) => {
+const ExpensesList = ({ setTotalExpenses }) => {
   // Fetching from database
   const [dataFromDatabase, setDataFromDatabase] = useState([]);
 
@@ -19,10 +19,23 @@ const ExpensesList = ({ isRendering }) => {
     setDataFromDatabase(expenseData);
   };
 
+  // Adding total expenses from database
+  const expensesArray = [];
+  let sum = 0;
+  const fetchExpenses = () => {
+    dataFromDatabase.map((expense) => {
+      expensesArray.push(parseFloat(expense.amount));
+    });
+    sum = expensesArray.reduce((a, b) => a + b, 0);
+    setTotalExpenses(sum);
+  };
+
+  // console.log(dataFromDatabase);
   useEffect(() => {
     fetchData();
-    console.log("i am rendering");
-  }, [isRendering]);
+    fetchExpenses();
+  });
+
   return (
     <ul className={expenseListStyles.expenseList}>
       {dataFromDatabase.map((expenseItem) => {

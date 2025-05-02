@@ -9,23 +9,25 @@ import ExpenseTotal from "./Components/ExpenseTotal/ExpenseTotal";
 
 function App() {
   const [isAddingExpense, setIsAddingExpense] = useState(false);
-  const [isRendering, setIsRendering] = useState(false);
+  const [totalExpenses, setTotalExpenses] = useState(0);
 
   const openCloseAddModal = () => {
     if (isAddingExpense) {
       setIsAddingExpense(false);
+      setIsRendering(true);
     } else {
       setIsAddingExpense(true);
+      setIsRendering(false);
     }
   };
   return (
     <div className={styles.rootContainer}>
       <div className={styles.appContainer}>
         <section className={styles.totalExpensesContainer}>
-          <ExpenseTotal></ExpenseTotal>
+          <ExpenseTotal totalExpenses={totalExpenses}></ExpenseTotal>
         </section>
         <section className={styles.individualExpensesContainer}>
-          <ExpensesList isRendering={isRendering}></ExpensesList>
+          <ExpensesList setTotalExpenses={setTotalExpenses}></ExpensesList>
         </section>
         <Button
           onClick={openCloseAddModal}
