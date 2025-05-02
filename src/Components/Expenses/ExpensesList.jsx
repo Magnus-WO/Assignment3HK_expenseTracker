@@ -1,28 +1,37 @@
 import expenseListStyles from "./ExpensesList.module.css";
 import Button from "../Button/Button";
 import Expense from "../Expense/Expense";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { database } from "../../firebaseConfig";
 import { useEffect, useState } from "react";
 
-const ExpensesList = ({ setTotalExpenses }) => {
+const ExpensesList = ({
+  setTotalExpenses,
+  isAddingExpense,
+  setIsAddingExpense,
+  isDeletingExpense,
+  setIsDeletingExpense,
+}) => {
   // Fetching from database
   const [dataFromDatabase, setDataFromDatabase] = useState([]);
 
   const fetchData = async () => {
-    const querySnapshot = await getDocs(collection(database, "expenses"));
-    const expenseData = querySnapshot.docs.map((expense) => ({
-      id: expense.id,
-      ...expense.data(),
-    }));
-
-    setDataFromDatabase(expenseData);
+    try {
+      const querySnapshot = await getDocs(collection(database, "expenses"));
+      const expenseData = querySnapshot.docs.map((expense) => ({
+        id: expense.id,
+        ...expense.data(),
+      }));
+      setDataFromDatabase(expenseData);
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   // Adding total expenses from database
   const expensesArray = [];
   let sum = 0;
-  const fetchExpenses = () => {
+  const fetchTotalExpenses = () => {
     dataFromDatabase.map((expense) => {
       expensesArray.push(parseFloat(expense.amount));
     });
@@ -30,10 +39,23 @@ const ExpensesList = ({ setTotalExpenses }) => {
     setTotalExpenses(sum);
   };
 
-  // console.log(dataFromDatabase);
+  // Deleting from database
+  const deleteExpense = async (id) => {
+    setIsAddingExpense(false);
+    setIsDeletingExpense(true);
+    try {
+      const docRef = doc(database, "expenses", id);
+      await deleteDoc(docRef);
+    } catch (error) {
+      console.log(error.message);
+    } finally {
+      setIsDeletingExpense(false);
+    }
+  };
+
   useEffect(() => {
     fetchData();
-    fetchExpenses();
+    fetchTotalExpenses();
   });
 
   return (
@@ -46,6 +68,9 @@ const ExpensesList = ({ setTotalExpenses }) => {
             date={expenseItem.date}
             description={expenseItem.description}
             key={expenseItem.id}
+            deleteExpense={() => {
+              deleteExpense(expenseItem.id);
+            }}
           />
         );
       })}

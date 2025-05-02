@@ -9,15 +9,14 @@ import ExpenseTotal from "./Components/ExpenseTotal/ExpenseTotal";
 
 function App() {
   const [isAddingExpense, setIsAddingExpense] = useState(false);
+  const [isDeletingExpense, setIsDeletingExpense] = useState(false);
   const [totalExpenses, setTotalExpenses] = useState(0);
 
   const openCloseAddModal = () => {
     if (isAddingExpense) {
       setIsAddingExpense(false);
-      setIsRendering(true);
     } else {
       setIsAddingExpense(true);
-      setIsRendering(false);
     }
   };
   return (
@@ -27,7 +26,13 @@ function App() {
           <ExpenseTotal totalExpenses={totalExpenses}></ExpenseTotal>
         </section>
         <section className={styles.individualExpensesContainer}>
-          <ExpensesList setTotalExpenses={setTotalExpenses}></ExpensesList>
+          <ExpensesList
+            setTotalExpenses={setTotalExpenses}
+            isAddingExpense={isAddingExpense}
+            setIsAddingExpense={setIsAddingExpense}
+            isDeletingExpense={isDeletingExpense}
+            setIsDeletingExpense={setIsDeletingExpense}
+          ></ExpensesList>
         </section>
         <Button
           onClick={openCloseAddModal}
@@ -35,12 +40,7 @@ function App() {
         >
           Add
         </Button>
-        {isAddingExpense && (
-          <Modal
-            closeModal={openCloseAddModal}
-            setIsRendering={setIsRendering}
-          ></Modal>
-        )}
+        {isAddingExpense && <Modal closeModal={openCloseAddModal}></Modal>}
       </div>
     </div>
   );

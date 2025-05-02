@@ -1,7 +1,7 @@
 import expenseStyle from "./Expense.module.css";
 import Button from "../Button/Button";
 
-const Expense = ({ title, amount, date, description }) => {
+const Expense = ({ title, amount, date, description, deleteExpense }) => {
   return (
     <li className={expenseStyle.expenseItem}>
       <div className={expenseStyle.infoContainer}>
@@ -28,6 +28,7 @@ const Expense = ({ title, amount, date, description }) => {
         </Button>
         <Button
           className={`${expenseStyle.button} ${expenseStyle.deleteButton}`}
+          onClick={deleteExpense}
         >
           Delete
         </Button>
