@@ -49,6 +49,8 @@
 .input {
   background: var(--color-surface);
   padding: 0 2px;
+  height: 24px;
+  border-radius: var(--radius-sm);
 }
 
 .input:focus {
@@ -57,6 +59,7 @@
 
 .textarea {
   resize: none;
+  height: auto;
 }
 
 .form .submitButton {

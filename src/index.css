@@ -14,7 +14,13 @@ li {
   --color-primary-light: #a78bfa; /* Soft lilac glow - ethereal highlight */
   --color-accent: #3baf75; /* Elven emerald - nature and harmony */
   --color-danger: #b91c1c; /* Dragon's blood - danger and flame */
-  --color-warning: #d97706; /* Forged gold - treasure and caution */
+  --color-warning: #1d5cbbcb;
+  --color-delete: #b9a258;
+  --color-surface: #e7e2d1; /* Ancient stone - subtle elevation */
+  --color-border: #c6bfaa; /* Worn leather - grounded and muted */
+  --color-text: #2d1b0d; /* Dark ink - strong readability */
+  --color-text-muted: #6d5844; /* Weathered script - lore and age */
+  --color-body-background: #2e2d2c;
 
   /* Background gradients */
   --color-background: #f3efe8; /* Parchment - aged scroll texture */
@@ -40,12 +46,6 @@ li {
       transparent 1px,
       transparent 5px
     );
-
-  --color-surface: #e7e2d1; /* Ancient stone - subtle elevation */
-  --color-border: #c6bfaa; /* Worn leather - grounded and muted */
-  --color-text: #2d1b0d; /* Dark ink - strong readability */
-  --color-text-muted: #6d5844; /* Weathered script - lore and age */
-  --color-body-background: #2e2d2c;
 
   /* Typography */
   --font-family: "Merriweather", serif; /* Elegant serif for that fantasy tone */

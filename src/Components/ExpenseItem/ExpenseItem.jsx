@@ -1,7 +1,15 @@
-import expenseStyle from "./Expense.module.css";
+import expenseStyle from "./ExpenseItem.module.css";
 import Button from "../Button/Button";
 
-const Expense = ({ title, amount, date, description, deleteExpense }) => {
+const ExpenseItem = ({
+  title,
+  amount,
+  date,
+  description,
+  deleteExpense,
+  populateEditForm,
+  id,
+}) => {
   return (
     <li className={expenseStyle.expenseItem}>
       <div className={expenseStyle.infoContainer}>
@@ -23,7 +31,10 @@ const Expense = ({ title, amount, date, description, deleteExpense }) => {
         </p>
       </div>
       <div className={expenseStyle.buttonsContainer}>
-        <Button className={`${expenseStyle.button} ${expenseStyle.editButton}`}>
+        <Button
+          className={`${expenseStyle.button} ${expenseStyle.editButton}`}
+          onClick={populateEditForm}
+        >
           Edit
         </Button>
         <Button
@@ -37,4 +48,4 @@ const Expense = ({ title, amount, date, description, deleteExpense }) => {
   );
 };
 
-export default Expense;
+export default ExpenseItem;

@@ -1,10 +1,16 @@
 import modalStyles from "./Modal.module.css";
 import Button from "../Button/Button";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, updateDoc, doc } from "firebase/firestore";
 import { database } from "../../firebaseConfig";
 import { useState } from "react";
 
-const Modal = ({ closeModal, setIsRendering }) => {
+const Modal = ({
+  closeModal,
+  expenseToEdit,
+  isEditingExpense,
+  setIsEditingExpense,
+  setExpenseToEdit,
+}) => {
   // Fetching expense info and storing in an object
   const [expenseInfo, setExpenseInfo] = useState({
     title: "",
@@ -16,14 +22,22 @@ const Modal = ({ closeModal, setIsRendering }) => {
 
   // Retrieving form inputs
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setExpenseInfo((prev) => ({ ...prev, [name]: value }));
+    if (!isEditingExpense) {
+      const { name, value } = e.target;
+      setExpenseInfo((prev) => ({ ...prev, [name]: value }));
+    } else {
+      const { name, value } = e.target;
+      setExpenseToEdit((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
   // Saving to firestore
-  const saveToFirestore = async (expense) => {
+  const saveToFirestore = async (expenseInfo) => {
     try {
-      const docRef = await addDoc(collection(database, "expenses"), expense);
+      const docRef = await addDoc(
+        collection(database, "expenses"),
+        expenseInfo
+      );
       console.log(
         `expense has been added to firestore with the id ${docRef.id}`
       );
@@ -32,16 +46,43 @@ const Modal = ({ closeModal, setIsRendering }) => {
     }
   };
 
+  // Updating expense
+  const updateExpense = async (id) => {
+    const updatedExpense = {
+      title: expenseToEdit.title,
+      amount: expenseToEdit.amount,
+      date: expenseToEdit.date,
+      category: expenseToEdit.category,
+      description: expenseToEdit.description,
+      id: expenseToEdit.id,
+    };
+    console.log(updatedExpense);
+
+    const docRef = doc(database, "expenses", id);
+    await updateDoc(docRef, updatedExpense);
+    console.log("expense updated");
+  };
+
   // Handling form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      await saveToFirestore(expenseInfo);
-      console.log("expense data:", expenseInfo);
-    } catch (error) {
-      console.log(error.message);
+    if (!isEditingExpense) {
+      try {
+        await saveToFirestore(expenseInfo);
+        console.log("expense data:", expenseInfo);
+        closeModal();
+      } catch (error) {
+        console.log(error.message);
+      }
+    } else if (isEditingExpense) {
+      try {
+        await updateExpense(expenseToEdit.id);
+        setIsEditingExpense(false);
+      } catch (error) {
+        console.log(error);
+        console.log(error.message);
+      }
     }
-    setIsRendering(true);
   };
 
   return (
@@ -59,6 +100,7 @@ const Modal = ({ closeModal, setIsRendering }) => {
             id="title"
             className={modalStyles.input}
             placeholder="Name of the expense"
+            value={isEditingExpense ? expenseToEdit.title : expenseInfo.title}
             onChange={handleChange}
           />
         </div>
@@ -73,6 +115,7 @@ const Modal = ({ closeModal, setIsRendering }) => {
             id="amount"
             className={modalStyles.input}
             placeholder=""
+            value={isEditingExpense ? expenseToEdit.amount : expenseInfo.amount}
             onChange={handleChange}
           />
         </div>
@@ -87,6 +130,7 @@ const Modal = ({ closeModal, setIsRendering }) => {
             id="date"
             className={modalStyles.input}
             placeholder="Date of the expense"
+            value={isEditingExpense ? expenseToEdit.date : expenseInfo.date}
             onChange={handleChange}
           />
         </div>
@@ -100,6 +144,9 @@ const Modal = ({ closeModal, setIsRendering }) => {
             id="category"
             className={modalStyles.input}
             onChange={handleChange}
+            value={
+              isEditingExpense ? expenseToEdit.category : expenseInfo.category
+            }
           >
             <option value="">Select:</option>
             <option value="utilities">Utilities</option>
@@ -120,14 +167,24 @@ const Modal = ({ closeModal, setIsRendering }) => {
             rows={5}
             className={`${modalStyles.input} ${modalStyles.textarea}`}
             placeholder="Optional"
+            value={
+              isEditingExpense
+                ? expenseToEdit.description
+                : expenseInfo.description
+            }
             onChange={handleChange}
           ></textarea>
         </div>
-        <Button className={modalStyles.submitButton}>Add expense</Button>
+        <Button className={modalStyles.submitButton} type="submit">
+          {isEditingExpense ? "Confirm edit" : "Add expense"}
+        </Button>
 
         <Button
           type="button"
-          onClick={closeModal}
+          onClick={() => {
+            closeModal();
+            setIsEditingExpense(false);
+          }}
           className={modalStyles.closeModalButton}
         >
           Close

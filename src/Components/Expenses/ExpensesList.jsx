@@ -1,16 +1,23 @@
 import expenseListStyles from "./ExpensesList.module.css";
 import Button from "../Button/Button";
-import Expense from "../Expense/Expense";
-import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
+import ExpenseItem from "../ExpenseItem/ExpenseItem";
+import {
+  collection,
+  getDocs,
+  deleteDoc,
+  doc,
+  updateDoc,
+} from "firebase/firestore";
 import { database } from "../../firebaseConfig";
 import { useEffect, useState } from "react";
 
 const ExpensesList = ({
   setTotalExpenses,
-  isAddingExpense,
   setIsAddingExpense,
-  isDeletingExpense,
   setIsDeletingExpense,
+  setIsEditingExpense,
+  setExpenseToEdit,
+  expenseToEdit,
 }) => {
   // Fetching from database
   const [dataFromDatabase, setDataFromDatabase] = useState([]);
@@ -42,6 +49,7 @@ const ExpensesList = ({
   // Deleting from database
   const deleteExpense = async (id) => {
     setIsAddingExpense(false);
+    setIsEditingExpense(false);
     setIsDeletingExpense(true);
     try {
       const docRef = doc(database, "expenses", id);
@@ -50,6 +58,28 @@ const ExpensesList = ({
       console.log(error.message);
     } finally {
       setIsDeletingExpense(false);
+    }
+  };
+
+  // Populating edit form
+  const populateEditForm = async (id) => {
+    setIsAddingExpense(false);
+    setIsDeletingExpense(false);
+    setIsEditingExpense(true);
+
+    let expenseToEditId = id;
+    console.log(expenseToEditId);
+
+    //
+    try {
+      const querySnapshot = await getDocs(collection(database, "expenses"));
+
+      const expenseToEdit = querySnapshot.docs.find((doc) => {
+        return doc.id === id;
+      });
+      setExpenseToEdit({ ...expenseToEdit.data(), id: expenseToEditId });
+    } catch (error) {
+      console.log(error.message);
     }
   };
 
@@ -62,14 +92,18 @@ const ExpensesList = ({
     <ul className={expenseListStyles.expenseList}>
       {dataFromDatabase.map((expenseItem) => {
         return (
-          <Expense
+          <ExpenseItem
             title={expenseItem.title}
             amount={expenseItem.amount}
             date={expenseItem.date}
             description={expenseItem.description}
             key={expenseItem.id}
+            id={expenseItem.id}
             deleteExpense={() => {
               deleteExpense(expenseItem.id);
+            }}
+            populateEditForm={() => {
+              populateEditForm(expenseItem.id);
             }}
           />
         );

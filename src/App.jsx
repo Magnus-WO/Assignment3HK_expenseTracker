@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import styles from "./App.module.css";
 
 //Importing components
@@ -10,13 +10,38 @@ import ExpenseTotal from "./Components/ExpenseTotal/ExpenseTotal";
 function App() {
   const [isAddingExpense, setIsAddingExpense] = useState(false);
   const [isDeletingExpense, setIsDeletingExpense] = useState(false);
+  const [isEditingExpense, setIsEditingExpense] = useState(false);
+
+  const [expenseInfo, setExpenseInfo] = useState({
+    title: "",
+    amount: 0,
+    date: "",
+    category: "",
+    description: "",
+  });
   const [totalExpenses, setTotalExpenses] = useState(0);
+  const [expenseToEdit, setExpenseToEdit] = useState({
+    title: "",
+    amount: 0,
+    date: "",
+    category: "",
+    description: "",
+    id: "",
+  });
 
   const openCloseAddModal = () => {
     if (isAddingExpense) {
       setIsAddingExpense(false);
+      setIsEditingExpense(false);
     } else {
       setIsAddingExpense(true);
+    }
+  };
+  const openCloseEditModal = () => {
+    if (isEditingExpense) {
+      setIsEditingExpense(false);
+    } else {
+      setIsEditingExpense(true);
     }
   };
   return (
@@ -28,10 +53,11 @@ function App() {
         <section className={styles.individualExpensesContainer}>
           <ExpensesList
             setTotalExpenses={setTotalExpenses}
-            isAddingExpense={isAddingExpense}
             setIsAddingExpense={setIsAddingExpense}
-            isDeletingExpense={isDeletingExpense}
             setIsDeletingExpense={setIsDeletingExpense}
+            setIsEditingExpense={setIsEditingExpense}
+            setExpenseToEdit={setExpenseToEdit}
+            expenseToEdit={expenseToEdit}
           ></ExpensesList>
         </section>
         <Button
@@ -40,7 +66,23 @@ function App() {
         >
           Add
         </Button>
-        {isAddingExpense && <Modal closeModal={openCloseAddModal}></Modal>}
+        {isAddingExpense && (
+          <Modal
+            closeModal={openCloseAddModal}
+            setExpenseInfo={setExpenseInfo}
+            expenseInfo={expenseInfo}
+            setIsEditingExpense={setIsEditingExpense}
+          ></Modal>
+        )}
+        {isEditingExpense && (
+          <Modal
+            closeModal={openCloseEditModal}
+            expenseToEdit={expenseToEdit}
+            isEditingExpense={isEditingExpense}
+            setIsEditingExpense={setIsEditingExpense}
+            setExpenseToEdit={setExpenseToEdit}
+          ></Modal>
+        )}
       </div>
     </div>
   );
