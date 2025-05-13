@@ -12,40 +12,13 @@ import { database } from "../../firebaseConfig";
 import { useEffect, useState } from "react";
 
 const ExpensesList = ({
-  setTotalExpenses,
   setIsAddingExpense,
   setIsDeletingExpense,
   setIsEditingExpense,
   setExpenseToEdit,
-  expenseToEdit,
+  dataFromDatabase,
+  selectedMonth,
 }) => {
-  // Fetching from database
-  const [dataFromDatabase, setDataFromDatabase] = useState([]);
-
-  const fetchData = async () => {
-    try {
-      const querySnapshot = await getDocs(collection(database, "expenses"));
-      const expenseData = querySnapshot.docs.map((expense) => ({
-        id: expense.id,
-        ...expense.data(),
-      }));
-      setDataFromDatabase(expenseData);
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-
-  // Adding total expenses from database
-  const expensesArray = [];
-  let sum = 0;
-  const fetchTotalExpenses = () => {
-    dataFromDatabase.map((expense) => {
-      expensesArray.push(parseFloat(expense.amount));
-    });
-    sum = expensesArray.reduce((a, b) => a + b, 0);
-    setTotalExpenses(sum);
-  };
-
   // Deleting from database
   const deleteExpense = async (id) => {
     setIsAddingExpense(false);
@@ -68,12 +41,10 @@ const ExpensesList = ({
     setIsEditingExpense(true);
 
     let expenseToEditId = id;
-    console.log(expenseToEditId);
 
     //
     try {
       const querySnapshot = await getDocs(collection(database, "expenses"));
-
       const expenseToEdit = querySnapshot.docs.find((doc) => {
         return doc.id === id;
       });
@@ -82,11 +53,6 @@ const ExpensesList = ({
       console.log(error.message);
     }
   };
-
-  useEffect(() => {
-    fetchData();
-    fetchTotalExpenses();
-  });
 
   return (
     <ul className={expenseListStyles.expenseList}>

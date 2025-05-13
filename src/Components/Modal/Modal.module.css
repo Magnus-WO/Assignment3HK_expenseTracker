@@ -1,7 +1,7 @@
 .modal {
   height: 100%;
   width: 100%;
-  background: var(--parchment-light);
+  background: var(--color-app-background);
   background-blend-mode: color-burn;
 
   position: absolute;
@@ -19,7 +19,7 @@
 .form {
   height: 100%;
   width: 100%;
-  background: var(--parchment-golden);
+  background: var(--color-background-4);
   background-blend-mode: hard-light;
 
   border-radius: var(--radius-md);
@@ -51,6 +51,7 @@
   padding: 0 2px;
   height: 24px;
   border-radius: var(--radius-sm);
+  font-family: enchanted;
 }
 
 .input:focus {
@@ -60,10 +61,12 @@
 .textarea {
   resize: none;
   height: auto;
+  font-family: enchanted;
 }
 
 .form .submitButton {
-  background-color: var(--color-accent);
+  background-color: var(--color-primary);
+  color: white;
   width: fit-content;
   padding: var(--space-sm);
   display: flex;

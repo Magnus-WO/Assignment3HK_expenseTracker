@@ -1,3 +1,13 @@
+@font-face {
+  font-family: firlest;
+  src: url("./assets/Font/Firlest-Regular.otf");
+}
+
+@font-face {
+  font-family: enchanted;
+  src: url("./assets/Font/Enchanted\ Land\ DEMO.otf");
+}
+
 .rootContainer {
   width: 100%;
   min-height: 100vh;
@@ -7,18 +17,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
-  font-family: var(--font-family);
+  font-family: enchanted;
 }
 
 .appContainer {
   height: 90%;
   width: 40%;
   min-width: 400px;
-  background: var(--parchment-light);
-  background-blend-mode: color-burn;
+  /* background: var(--parchment-light);
+  background-blend-mode: color-burn; */
+  background-color: var(--color-app-background);
+
   box-shadow: var(--shadow-sm);
   position: relative;
+  border: 6px solid rgba(30, 67, 179, 0.444);
+  border-style: inset;
   border-radius: var(--radius-md);
 }
 
@@ -26,7 +39,14 @@
   height: 35%;
   width: 100%;
   padding: var(--space-lg);
+}
+
+.filterContainer {
+  border-top: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
+  padding: var(--space-xs) 0;
+  text-align: center;
+  background: var(--color-background-3);
 }
 
 .individualExpensesContainer {
@@ -37,8 +57,8 @@
 }
 
 .appContainer .openAddModalButton {
-  background-color: var(--color-accent);
-  color: var(--color-text);
+  background-color: var(--color-primary);
+  color: white;
 
   position: absolute;
   bottom: var(--space-md);

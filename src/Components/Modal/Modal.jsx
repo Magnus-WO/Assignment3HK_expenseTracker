@@ -38,9 +38,6 @@ const Modal = ({
         collection(database, "expenses"),
         expenseInfo
       );
-      console.log(
-        `expense has been added to firestore with the id ${docRef.id}`
-      );
     } catch (error) {
       console.log(error.message);
     }
@@ -56,11 +53,9 @@ const Modal = ({
       description: expenseToEdit.description,
       id: expenseToEdit.id,
     };
-    console.log(updatedExpense);
 
     const docRef = doc(database, "expenses", id);
     await updateDoc(docRef, updatedExpense);
-    console.log("expense updated");
   };
 
   // Handling form submit

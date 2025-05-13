@@ -1,25 +1,26 @@
 .expenseItem {
   width: 100%;
   height: 64px;
-  border: 1px solid var(--color-border);
+  /* border: 1px solid var(--color-border); */
   border-radius: var(--radius-sm);
 
   display: flex;
   align-items: center;
   justify-content: center;
-
-  box-shadow: var(--shadow-md);
 }
 
 .expenseItem :not(:last-child) {
   padding: 0 var(--space-xs);
 }
 .expenseItem:nth-of-type(odd) {
-  background: var(--parchment-textured);
-  background-blend-mode: color-burn;
+  background: var(--color-background-1);
+  box-shadow: var(--shadow-row-odd);
 }
+
 .expenseItem:nth-of-type(even) {
-  background: var(--parchment-burnished);
+  /* box-shadow: var(--bgcolor-row-even); */
+  background: var(--color-background-2);
+  box-shadow: var(--shadow-row-even);
 }
 
 .expenseItem .infoContainer {
@@ -63,8 +64,10 @@
 }
 
 .buttonsContainer .editButton {
-  background: var(--parchment-golden);
+  /* background: var(--parchment-golden); */
+  background-color: gold;
 }
 .buttonsContainer .deleteButton {
-  background: var(--parchment-burnished);
+  /* background-color: var(--color-danger); */
+  background: var(--parchment-red);
 }

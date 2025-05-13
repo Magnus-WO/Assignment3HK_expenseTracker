@@ -1,0 +1,9 @@
+.filterHeader {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.filter {
+  background: var(--parchment-textured);
+  background-blend-mode: hue;
+}
