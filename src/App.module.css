@@ -22,11 +22,10 @@
 
 .appContainer {
   height: 90%;
-  width: 40%;
-  min-width: 400px;
-  /* background: var(--parchment-light);
-  background-blend-mode: color-burn; */
-  background-color: var(--color-app-background);
+  width: 70%;
+
+  background: var(--background-1-textured);
+  background-blend-mode: hue;
 
   box-shadow: var(--shadow-sm);
   position: relative;
@@ -46,7 +45,7 @@
   border-bottom: 1px solid var(--color-border);
   padding: var(--space-xs) 0;
   text-align: center;
-  background: var(--color-background-3);
+  background: var(--background-1-textured);
 }
 
 .individualExpensesContainer {
@@ -63,4 +62,35 @@
   position: absolute;
   bottom: var(--space-md);
   right: var(--space-md);
+}
+
+/* Responsiveness */
+
+@media screen and (max-width: 769px) {
+  .appContainer {
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .rootContainer {
+    height: 100vh;
+    padding: 0;
+  }
+  .appContainer {
+    height: 100%;
+    width: 100%;
+    padding: var(--space-md);
+  }
+
+  .individualExpensesContainer {
+    height: 55%;
+  }
+  .appContainer .openAddModalButton {
+    /* position: sticky;
+    top: 0;
+    left: 0;
+    bottom: 10000;
+    right: 0; */
+  }
 }

@@ -10,18 +10,22 @@ li {
 
 :root {
   /* Color palette */
-  --color-primary: #720e9e; /* Arcane purple - mystical and noble */
-  --color-primary-light: #a78bfa; /* Soft lilac glow - ethereal highlight */
-  --color-accent: #3baf75; /* Elven emerald - nature and harmony */
+  --color-primary: #552d9b;
+  --color-primary-light: #884ca7;
+  --color-accent: #3baf75;
   --color-accent-2: #42c8f1;
-  --color-danger: #b91c1c; /* Dragon's blood - danger and flame */
-  --color-surface: #e7e2d1; /* Ancient stone - subtle elevation */
-  --color-border: #c6bfaa; /* Worn leather - grounded and muted */
-  --color-text: #403206; /* Dark ink - strong readability */
-  --color-text-2: #ffea3e;
-  --color-text-muted: #6d5844; /* Weathered script - lore and age */
+  --color-accent-3: #25bcb5;
 
-  --color-app-background: #f5f0a1;
+  --color-danger: #b91c1c;
+  --color-warning: rgb(164, 123, 47);
+
+  --color-border: #c6bfaa;
+  --color-text: #282109;
+  --color-text-2: #ffea3e;
+  --color-text3: whitesmoke;
+  --color-text-muted: #6d5844;
+
+  --color-app-background: #f8f2a0;
   --color-body-background: #2e2d2c;
 
   /* Background gradients */
@@ -34,29 +38,31 @@ li {
     rgba(87, 199, 133, 1) 100%
   );
 
-  --color-background-3: linear-gradient(
-    172deg,
-    rgba(42, 123, 155, 1) 0%,
-    rgba(62, 157, 145, 1) 12%,
-    rgba(87, 199, 133, 1) 29%,
-    rgba(163, 210, 108, 1) 37%,
-    rgba(245, 229, 104, 0.99) 45%,
-    rgba(245, 229, 104, 1) 51%,
-    rgba(181, 210, 109, 1) 62%,
-    rgba(87, 199, 133, 1) 70%,
-    rgba(62, 157, 145, 1) 88%,
-    rgba(42, 123, 155, 1) 100%
-  );
+  --background-1-textured: radial-gradient(circle at 20% 20%, #e3dfab, #f8f2a0),
+    repeating-linear-gradient(
+      45deg,
+      rgba(155, 140, 120, 0.05),
+      rgba(155, 140, 120, 0.05) 1px,
+      transparent 1px,
+      transparent 5px
+    );
 
-  --color-background-4: linear-gradient(
-    150deg,
-    rgba(178, 95, 217, 1) 14%,
-    rgba(245, 240, 161, 1) 33%,
-    rgba(178, 89, 217, 1) 50%,
-    rgba(245, 240, 161, 1) 71%,
-    rgba(199, 127, 227, 1) 90%
-  );
-
+  --background-2-textured: radial-gradient(circle at 20% 20%, #42c8f1, #42c8f1),
+    repeating-linear-gradient(
+      45deg,
+      rgba(155, 140, 120, 0.05),
+      rgba(155, 140, 120, 0.05) 1px,
+      transparent 1px,
+      transparent 5px
+    );
+  --background-3-textured: radial-gradient(circle at 20% 20%, #25bcb5, #25bcb5),
+    repeating-linear-gradient(
+      45deg,
+      rgba(155, 140, 120, 0.05),
+      rgba(155, 140, 120, 0.05) 1px,
+      transparent 1px,
+      transparent 5px
+    );
   --parchment-light: radial-gradient(circle at 30% 30%, #f8f4e1, #efe9d1),
     linear-gradient(135deg, rgba(224, 207, 160, 0.2) 25%, transparent 25%),
     linear-gradient(-45deg, rgba(224, 207, 160, 0.1) 25%, transparent 25%);
@@ -85,9 +91,9 @@ li {
 
   /* Typography */
 
-  --font-size-base: 16px;
-  --font-size-sm: 14px;
-  --font-size-lg: 18px;
+  --font-size-base: 1rem;
+  --font-size-sm: 0.8rem;
+  --font-size-lg: 1.4rem;
   --font-weight-normal: 400;
   --font-weight-bold: 700;
 

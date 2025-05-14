@@ -1,8 +1,8 @@
 .modal {
   height: 100%;
   width: 100%;
-  background: var(--color-app-background);
-  background-blend-mode: color-burn;
+  background: var(--background-1-textured);
+  background-blend-mode: difference;
 
   position: absolute;
   top: 0;
@@ -19,7 +19,7 @@
 .form {
   height: 100%;
   width: 100%;
-  background: var(--color-background-4);
+  background: var(--parchment-golden);
   background-blend-mode: hard-light;
 
   border-radius: var(--radius-md);
@@ -47,7 +47,7 @@
   color: var(--color-text);
 }
 .input {
-  background: var(--color-surface);
+  background: var(--parchment-textured);
   padding: 0 2px;
   height: 24px;
   border-radius: var(--radius-sm);
@@ -76,7 +76,7 @@
 
 .form .closeModalButton {
   background-color: var(--color-danger);
-  color: var(--color-text);
+  color: var(--color-text3);
 
   position: absolute;
   bottom: var(--space-md);

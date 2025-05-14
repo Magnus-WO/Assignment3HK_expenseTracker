@@ -1,7 +1,6 @@
 .expenseItem {
   width: 100%;
   height: 64px;
-  /* border: 1px solid var(--color-border); */
   border-radius: var(--radius-sm);
 
   display: flex;
@@ -13,16 +12,16 @@
   padding: 0 var(--space-xs);
 }
 .expenseItem:nth-of-type(odd) {
-  background: var(--color-background-1);
+  background: var(--background-2-textured);
+  background-blend-mode: difference;
   box-shadow: var(--shadow-row-odd);
 }
 
 .expenseItem:nth-of-type(even) {
-  /* box-shadow: var(--bgcolor-row-even); */
-  background: var(--color-background-2);
+  background: var(--background-3-textured);
+  background-blend-mode: difference;
   box-shadow: var(--shadow-row-even);
 }
-
 .expenseItem .infoContainer {
   text-align: left;
   color: var(--color-text);
@@ -30,7 +29,6 @@
   height: 100%;
   border-right: 1px dotted var(--color-border);
 }
-
 .expenseItem .header {
   font-size: var(--font-size-base);
   color: var(--color-text);
@@ -39,6 +37,7 @@
 
 .expenseItem .info {
   height: 40px;
+  font-size: var(--font-size-base);
 }
 
 .infoContainer .decription {
@@ -61,13 +60,56 @@
   width: 48px;
   color: var(--color-text);
   box-shadow: var(--shadow-sm);
+  color: var(--color-text3);
 }
 
 .buttonsContainer .editButton {
   /* background: var(--parchment-golden); */
-  background-color: gold;
+  background-color: var(--color-primary);
+  background-color: var(--color-warning);
 }
 .buttonsContainer .deleteButton {
-  /* background-color: var(--color-danger); */
-  background: var(--parchment-red);
+  background-color: var(--color-danger);
+}
+
+/* Responsiveness */
+@media screen and (max-width: 769px) {
+  .expenseItem .info,
+  .expenseItem .header {
+    font-size: var(--font-size-sm);
+  }
+  .buttonsContainer .button {
+    font-size: var(--font-size-sm);
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .expenseItem {
+    width: 100%;
+    height: 240px;
+    flex-wrap: wrap;
+  }
+  .expenseItem .infoContainer {
+    width: 100%;
+    height: 15%;
+  }
+
+  .infoContainer {
+    border-bottom: 1px dotted black;
+  }
+  .expenseItem .info {
+    text-align: center;
+  }
+  .buttonsContainer {
+    height: 20px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    gap: var(--space-lg);
+  }
+  .buttonsContainer .button {
+    /* height: 24px;
+    width: 48px; */
+  }
 }
