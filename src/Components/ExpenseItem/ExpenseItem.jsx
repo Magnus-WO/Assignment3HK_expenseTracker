@@ -24,7 +24,9 @@ const ExpenseItem = ({
         <h3 className={expenseStyle.header}>Date</h3>
         <p className={expenseStyle.info}>{date}</p>
       </div>
-      <div className={expenseStyle.infoContainer}>
+      <div
+        className={`${expenseStyle.infoContainer} ${expenseStyle.descriptionContainer}`}
+      >
         <h3 className={expenseStyle.header}>Description</h3>
         <p className={`${expenseStyle.info} ${expenseStyle.decription}`}>
           {description}

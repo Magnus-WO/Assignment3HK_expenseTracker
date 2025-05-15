@@ -38,6 +38,9 @@
   height: 35%;
   width: 100%;
   padding: var(--space-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .filterContainer {
@@ -49,7 +52,7 @@
 }
 
 .individualExpensesContainer {
-  height: 65%;
+  height: 55%;
   width: 100%;
   padding: var(--space-md);
   overflow-y: auto;
@@ -65,10 +68,16 @@
 }
 
 /* Responsiveness */
-
+@media screen and (min-width: 1440px) {
+  .appContainer .openAddModalButton {
+    height: 48px;
+    width: 64px;
+    font-size: var(--font-size-md);
+  }
+}
 @media screen and (max-width: 769px) {
   .appContainer {
-    width: 60%;
+    width: 80%;
   }
 }
 
@@ -82,15 +91,11 @@
     width: 100%;
     padding: var(--space-md);
   }
+  .totalExpensesContainer {
+    padding: 0;
+  }
 
   .individualExpensesContainer {
     height: 55%;
-  }
-  .appContainer .openAddModalButton {
-    /* position: sticky;
-    top: 0;
-    left: 0;
-    bottom: 10000;
-    right: 0; */
   }
 }

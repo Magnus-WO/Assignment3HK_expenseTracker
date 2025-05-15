@@ -3,6 +3,7 @@ import Button from "../Button/Button";
 import { collection, addDoc, updateDoc, doc } from "firebase/firestore";
 import { database } from "../../firebaseConfig";
 import { useState } from "react";
+import useValidateForm from "../../Hooks/useValidateForm";
 
 const Modal = ({
   closeModal,
@@ -30,6 +31,9 @@ const Modal = ({
       setExpenseToEdit((prev) => ({ ...prev, [name]: value }));
     }
   };
+
+  // Destructuring form validation
+  const { validateForm, formErrors } = useValidateForm();
 
   // Saving to firestore
   const saveToFirestore = async (expenseInfo) => {
@@ -61,6 +65,10 @@ const Modal = ({
   // Handling form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!validateForm(expenseInfo)) {
+      console.log("form not valid");
+      return;
+    }
     if (!isEditingExpense) {
       try {
         await saveToFirestore(expenseInfo);
@@ -93,11 +101,15 @@ const Modal = ({
             type="text"
             name="title"
             id="title"
+            maxLength={10}
             className={modalStyles.input}
             placeholder="Name of the expense"
             value={isEditingExpense ? expenseToEdit.title : expenseInfo.title}
             onChange={handleChange}
           />
+          {formErrors && (
+            <p className={modalStyles.errorMessage}>{formErrors.title}</p>
+          )}
         </div>
         {/* Amount */}
         <div className={modalStyles.inputContainer}>
@@ -108,11 +120,15 @@ const Modal = ({
             type="number"
             name="amount"
             id="amount"
+            maxLength={10}
             className={modalStyles.input}
             placeholder=""
             value={isEditingExpense ? expenseToEdit.amount : expenseInfo.amount}
             onChange={handleChange}
           />
+          {formErrors && (
+            <p className={modalStyles.errorMessage}>{formErrors.amount}</p>
+          )}
         </div>
         {/* Date */}
         <div className={modalStyles.inputContainer}>
@@ -128,6 +144,9 @@ const Modal = ({
             value={isEditingExpense ? expenseToEdit.date : expenseInfo.date}
             onChange={handleChange}
           />
+          {formErrors && (
+            <p className={modalStyles.errorMessage}>{formErrors.date}</p>
+          )}
         </div>
         {/* Category */}
         <div className={modalStyles.inputContainer}>
@@ -150,6 +169,9 @@ const Modal = ({
             <option value="transport">Transport</option>
             <option value="clothing">Clothing</option>
           </select>
+          {formErrors && (
+            <p className={modalStyles.errorMessage}>{formErrors.category}</p>
+          )}
         </div>
         {/* Description */}
         <div className={modalStyles.inputContainer}>

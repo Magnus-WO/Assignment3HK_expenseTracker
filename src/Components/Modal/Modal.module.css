@@ -19,6 +19,7 @@
 .form {
   height: 100%;
   width: 100%;
+  overflow-y: auto;
   background: var(--parchment-golden);
   background-blend-mode: hard-light;
 
@@ -81,4 +82,50 @@
   position: absolute;
   bottom: var(--space-md);
   right: var(--space-md);
+}
+
+.errorMessage {
+  color: var(--color-danger);
+  font-size: var(--font-size-sm);
+}
+/* Responsiveness */
+@media screen and (min-width: 1440px) {
+  .formTitle {
+    font-size: 2.5rem;
+  }
+  .label {
+    font-size: var(--font-size-lg);
+  }
+  .input {
+    height: 32px;
+    font-size: var(--font-size-md);
+  }
+  .errorMessage {
+    font-size: var(--font-size-base);
+  }
+
+  .textarea {
+    height: auto;
+  }
+  .form .submitButton {
+    font-size: var(--font-size-md);
+    height: 3rem;
+  }
+
+  .form .closeModalButton {
+    font-size: var(--font-size-md);
+    height: 3rem;
+    width: 4rem;
+  }
+}
+
+@media screen and (max-width: 769px) {
+  .formTitle {
+    font-size: var(--font-size-lg);
+  }
+}
+@media screen and (max-width: 430px) {
+  .formTitle {
+    text-align: center;
+  }
 }

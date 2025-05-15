@@ -35,8 +35,15 @@
 }
 
 /* Responsiveness */
+@media screen and (min-width: 1440px) {
+  .totalExpenseAmountContainer .totalExpenseHeader {
+    font-size: 3rem;
+  }
+}
+
 @media screen and (max-width: 430px) {
   .totalExpenseContainer {
     padding: var(--space-sm);
+    height: 70%;
   }
 }

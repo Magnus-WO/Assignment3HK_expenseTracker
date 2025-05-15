@@ -7,3 +7,12 @@
   background: var(--parchment-textured);
   background-blend-mode: hue;
 }
+@media screen and (min-width: 1440px) {
+  .filterHeader {
+    font-size: var(--font-size-md);
+  }
+
+  .filter {
+    height: 24px;
+  }
+}
